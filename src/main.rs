@@ -54,7 +54,7 @@ async fn main() -> std::io::Result<()> {
 
     // Note: web::Data created _outside_ HttpServer::new closure.
     let counter = web::Data::new(AppStateWithCounter {
-        app_name: String::from("rust-actix-web"),
+        app_name: String::from("rust-actix-web-example"),
         counter: Mutex::new(0),
     });
 
@@ -67,6 +67,7 @@ async fn main() -> std::io::Result<()> {
             .route("/counter/add/{number}", web::get().to(manual_counter_add))
             .route("/cat", web::get().to(manual_cat))
     })
+    //.bind(("127.0.0.1", 8080))?
     .bind("0.0.0.0:10000")?
     .run()
     .await
