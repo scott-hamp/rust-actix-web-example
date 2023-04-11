@@ -1,0 +1,1 @@
+/home/scott/Documents/Creative/Projects/Current/rust-actix-web-example/target/release/rust-actix-web-example: /home/scott/Documents/Creative/Projects/Current/rust-actix-web-example/src/main.rs /home/scott/Documents/Creative/Projects/Current/rust-actix-web-example/static/cat.html
