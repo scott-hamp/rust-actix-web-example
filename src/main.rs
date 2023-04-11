@@ -1,4 +1,5 @@
 use actix_web::{App, HttpRequest, HttpResponse, HttpServer, Responder, web};
+use std::env;
 use std::sync::Mutex;
 
 
@@ -51,6 +52,10 @@ async fn manual_cat() -> impl Responder {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+
+    let host = env::var("HOST").expect("Host not set.");
+    let port = env::var("PORT").expect("Port not set.");
+
     // Note: web::Data created _outside_ HttpServer::new closure.
     let counter = web::Data::new(AppStateWithCounter {
         app_name: String::from("rust-actix-web"),
@@ -66,7 +71,7 @@ async fn main() -> std::io::Result<()> {
             .route("/counter/add/{number}", web::get().to(manual_counter_add))
             .route("/cat", web::get().to(manual_cat))
     })
-    .bind(("127.0.0.1", 8080))?
+    .bind(format!("{}:{}", host, port))?
     .run()
     .await
 }
